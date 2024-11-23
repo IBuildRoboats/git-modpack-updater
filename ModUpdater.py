@@ -12,6 +12,9 @@ from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QPush
     QHBoxLayout, QMessageBox
 import shutil
 
+import installGit_win
+
+
 # Build with pyinstaller --onefile --icon=app.ico ModUpdater.py
 
 class GitCloneThread(QThread):
@@ -255,6 +258,8 @@ class MinecraftModApp(QWidget):
         msg.exec()
 
 def main():
+    if os.name == "nt":
+        installGit_win.main()
     app = QApplication(sys.argv)
     window = MinecraftModApp()
 
