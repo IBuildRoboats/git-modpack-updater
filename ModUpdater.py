@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLineEdit, QPush
     QHBoxLayout, QMessageBox
 import shutil
 
+# Build with pyinstaller --onefile --icon=app.ico ModUpdater.py
 
 class GitCloneThread(QThread):
     """Thread to handle the Git clone operation so it doesn't block the UI."""
@@ -151,7 +152,6 @@ class MinecraftModApp(QWidget):
             print(f"Deleting {mods_folder}")
             try:
                 self.remove_read_only_attribute(os.path.expanduser("~/AppData/Roaming/.minecraft/mods/.git/objects/pack"))
-
             except:
                 pass
             shutil.rmtree(mods_folder)
@@ -225,6 +225,7 @@ class MinecraftModApp(QWidget):
             mods_folder = os.path.join(self.mods_path, 'mods')
             try:
                 repo = git.Repo(mods_folder)
+                repo.git.checkout('--', '.')
                 repo.remotes.origin.pull()
                 print("Repository updated successfully.")
             except git.exc.GitCommandError as e:
