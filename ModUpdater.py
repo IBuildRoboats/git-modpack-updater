@@ -73,7 +73,7 @@ class MinecraftModApp(QWidget):
                     self.initSetupScreen()
 
     def init_ui(self):
-        self.setWindowTitle("Minecraft Mod Manager")
+        self.setWindowTitle("Mod Updater")
         self.setGeometry(300, 300, 400, 200)
 
         self.layout = QVBoxLayout()
@@ -150,7 +150,7 @@ class MinecraftModApp(QWidget):
             # Attempt to delete the directory and its contents
             print(f"Deleting {mods_folder}")
             try:
-                self.remove_read_only_attribute(os.path.expanduser("~\AppData\Roaming\.minecraft\mods\.git\objects\pack"))
+                self.remove_read_only_attribute(os.path.expanduser("~/AppData/Roaming/.minecraft/mods/.git/objects/pack"))
 
             except:
                 pass
